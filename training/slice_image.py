@@ -27,7 +27,8 @@ def run_yolo_tiler(inp_dir, out_dir):
     # Настраиваем параметры нарезки
     config = TileConfig(
         slice_wh=(640, 640),
-        overlap_wh=(0.2, 0.2)
+        overlap_wh=(0.2, 0.2),
+        include_negative_samples=True
     )
     
     # Запускаем нарезку

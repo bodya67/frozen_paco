@@ -1,8 +1,23 @@
+# local experiments and reference code
 cell_counter_claude/
+main.py
+distro/
+*.zip
+
+# data and outputs
 data/
 runs/
 test/
+results/
 predictions/
+
+# model weights (only the shipped model is tracked)
 *.pt
+!models/best.pt
+
+# python
 __pycache__/
 *.pyc
+
+# tooling
+.claude/

@@ -37,7 +37,7 @@ def run_cell_counter(img_path, output_dir, model_path, conf_th, device):
             # verbose=0,
         )
         
-        result.export_visuals(export_dir=output_dir, file_name=img)
+        result.export_visuals(export_dir=output_dir, file_name=img, hide_conf=True, text_size=1, rect_th=5)
         counts = Counter(op.category.name for op in result.object_prediction_list)
         df_to_save.loc[len(df_to_save)] = [img, counts['cell_1'], counts['cell_2'], counts['cell_1'] + (counts['cell_2'] * 2)]
 

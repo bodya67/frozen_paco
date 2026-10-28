@@ -44,7 +44,7 @@ python frozen_paco.py -i input_folder -o output_folder -ct 0.5
 | `-o`, `--output` | folder for results                          | required |
 | `-ct`, `--conf`  | confidence threshold, 0–1                   | `0.5`    |
 
-Lower `-ct` finds more cells but adds false positives; higher is stricter. Check a few annotated images and adjust for your microscope.
+The default `0.5` gave the lowest counting error on the test set. Lower values find more cells but add false positives; higher values miss cells. If your images differ (microscope, magnification, lighting), check a few annotated outputs and adjust.
 
 ## Output
 
@@ -55,9 +55,12 @@ Lower `-ct` finds more cells but adds false positives; higher is stricter. Check
 
 `models/best.pt` — YOLO11n, trained on 640×640 tiles of 4000×3000 images.
 
-| precision | recall | mAP50 | mAP50-95 |
-|-----------|--------|-------|----------|
-| 0.81      | 0.65   | 0.73  | 0.32     |
+| metric | value |
+|---|---|
+| counting error, 12 full test images (`-ct 0.5`) | **4.8 cells / image (5.3 %)**, ~88 cells per image |
+| detection (Ultralytics val, 640 px tiles) | P 0.81 · R 0.65 · mAP50 0.73 · mAP50-95 0.32 |
+
+Counting error is the mean absolute difference between the predicted and annotated `total` per image.
 
 Retraining: see [training/README.md](training/README.md).
 
